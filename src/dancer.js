@@ -35,9 +35,11 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.top = top;
   this.left = left;
   this.timeBetweenSteps = timeBetweenSteps;
-  this.$node = $('<span class="dancer"></span>');
+  this.$node = $('<span class="dancer"></span>')
+  //this.$node = $('<img src="http://i2.mirror.co.uk/incoming/article6379795.ece/ALTERNATES/s615b/Minion.jpg" class="blinkyDancer">');
   this.step();
   this.setPosition(this.top, this.left);
+
 };
 
 Dancer.prototype.step = function(){
@@ -50,4 +52,28 @@ Dancer.prototype.setPosition = function(top, left){
       left: left
     };
   this.$node.css(styleSettings);
+};
+
+Dancer.prototype.neighbors = function() {
+  var distances = [];
+  var top = this.top;
+  var left = this.left;
+  window.dancers.forEach(function(key, index) {
+    distances[index] = {};
+    distances[index]['nodes'] = key;
+    distances[index]['dist'] = calculateDistance(key.top, key.left, top, left);
+  });
+  distances.sort();
+
+  var numberOfNearest = 4;
+
+  for (var i = 0; i < numberOfNearest; i++) {
+    console.log("I'm here");
+    
+    distances[i]['nodes'].setPosition(this.top, null);
+  }
+
+  function calculateDistance(top1, left1, top2, left2) {
+    return Math.sqrt(Math.pow(top1 - top2, 2) + Math.pow(left1 - left2, 2));
+  }
 };

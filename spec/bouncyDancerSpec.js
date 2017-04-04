@@ -12,16 +12,10 @@ describe('bouncyDancer', function() {
     expect(bouncyDancer.$node).to.be.an.instanceof(jQuery);
   });
 
-  it('should have a step function that makes its node bounce-Up', function() {
-    sinon.spy(bouncyDancer.$node, 'slideUp');
+  it('should have a step function that makes its node bounce', function() {
+    sinon.spy(bouncyDancer.$node, 'animate');
     bouncyDancer.step();
-    expect(bouncyDancer.$node.slideUp.called).to.be.true;
-  });
-
-  it('should have a step function that makes its node bounce-Down', function() {
-    sinon.spy(bouncyDancer.$node, 'slideDown');
-    bouncyDancer.step();
-    expect(bouncyDancer.$node.slideDown.called).to.be.true;
+    expect(bouncyDancer.$node.animate.called).to.be.true;
   });
 
   describe('dance', function() {

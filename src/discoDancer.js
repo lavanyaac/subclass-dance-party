@@ -21,6 +21,8 @@
 var DiscoDancer = function(top, left, timeBetweenSteps){
   this.oldStep = Dancer.prototype.step;
   Dancer.apply(this,[top, left, timeBetweenSteps]);
+   var $img = $('<img src="http://randomnessessities.files.wordpress.com/2013/11/dora-the-explorer-52.jpg" class="discoDancer"></img>')
+  $img.appendTo(this.$node);
 };
 
 DiscoDancer.prototype = Object.create(Dancer.prototype);
@@ -28,10 +30,14 @@ DiscoDancer.prototype.constructor = DiscoDancer;
 
 
 DiscoDancer.prototype.step = function(){
-  debugger;
   this.oldStep();
-  this.$node.toggle();
+  this.$node.animate({left : this.left+20+'px'}, 'fast');
+  this.$node.animate({left : this.left-20+'px'}, 'fast');
 };
+
+DiscoDancer.prototype.lineUp = function(){
+  this.left = 180;
+}
 
 var makeDiscoDancer = function(top, left, timeBetweenSteps){
   var discoDancer = new DiscoDancer(top, left, timeBetweenSteps);

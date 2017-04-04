@@ -21,6 +21,8 @@
 var BlinkyDancer = function(top, left, timeBetweenSteps){
   this.oldStep = Dancer.prototype.step;
   Dancer.apply(this,[top, left, timeBetweenSteps]);
+  var $img = $('<img src="http://i2.mirror.co.uk/incoming/article6379795.ece/ALTERNATES/s615b/Minion.jpg" class="blinkyDancer"></img>')
+  $img.appendTo(this.$node);
 };
 
 BlinkyDancer.prototype = Object.create(Dancer.prototype);
@@ -31,6 +33,10 @@ BlinkyDancer.prototype.step = function(){
   this.oldStep();
   this.$node.toggle();
 };
+
+BlinkyDancer.prototype.lineUp = function(){
+  this.setPosition(null, 180);
+}
 
 var makeBlinkyDancer = function(top, left, timeBetweenSteps){
   var blinkyDancer = new BlinkyDancer(top, left, timeBetweenSteps);
